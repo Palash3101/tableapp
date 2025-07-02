@@ -6,7 +6,7 @@ function Header() {
       {/* Left Section */}
       <div className="flex items-center gap-[8px]">
         
-        <button className="">
+        <button>
           <div className="w-[25px] h-[20px] rounded-[5px] border-2 border-[#618666] bg-[#618666] relative overflow-hidden">
           <div className="absolute top-0 left-0 w-3/5 h-full bg-green-50">.</div>
           </div>
