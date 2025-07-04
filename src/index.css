@@ -13,3 +13,24 @@
 button{
   cursor: pointer;
 }
+
+.table-column {
+  width: 100%;
+  height: 32px;
+  padding-right: 8px;
+  padding-left: 8px;
+  background-color: transparent;
+  outline: none;
+
+  /* need to reduce this */
+  font-size: 14px; 
+
+  line-height: 16px;
+}
+
+.table-column:focus {
+  border: 1px solid #6c8b70;
+box-shadow:
+  -1px -4px 4px -2px #a7d7ad,   
+  4px 0px 4px -2px #a7d7ad; 
+}
