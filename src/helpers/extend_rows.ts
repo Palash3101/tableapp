@@ -1,14 +1,14 @@
 import tableData from '../data/AllOrders';
 import type { RowData } from '../types/row';
 
-let extendedData = tableData;
+const extendedData = tableData;
 
-const currentLength = extendedData.data.length;
+const currentLength = tableData.data.length;
 
 
 //Creating a empty template object for new rows
-let template:RowData = {}
-tableData.columns.forEach((column,index) => { 
+const template:RowData = {}
+tableData.columns.forEach((column) => { 
 
   if (column.accessor === "index") {
     template[column.accessor] = 0; 

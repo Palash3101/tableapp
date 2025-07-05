@@ -1,15 +1,16 @@
 import { Search, Bell } from 'lucide-react';
+import PanelShape from '../assets/Shape.svg'
 
-function Header() {
+function TopBar() {
   return (
     <div className="flex py-[8px] px-[16px] h-[56px] border-b-[1px] border-[#EEEEEE] justify-between w-full">
       {/* Left Section */}
       <div className="flex items-center gap-[8px]">
         
         <button>
-          <div className="w-[25px] h-[20px] rounded-[5px] border-2 border-[#618666] bg-[#618666] relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-3/5 h-full bg-green-50">.</div>
-          </div>
+          <img
+            src={`${PanelShape}`}
+          />
         </button>
         
         <div className="font-semibold text-[17px]">
@@ -63,4 +64,4 @@ function Header() {
   )
 }
 
-export default Header
+export default TopBar

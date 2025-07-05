@@ -1,62 +1,115 @@
-import {ArrowDownToLine, Share2, ChevronsRight, EyeOff, ArrowDownUp, ListFilter} from "lucide-react";
+//Icon imports
+import DoubleChevron from "../assets/DoubleChevron.svg";
+import Eye from "../assets/Eye.svg";
+import UpDownArrow from "../assets/UpDownArrow.svg";
+import Filter from "../assets/Filter.svg";
+import CellView from "../assets/CellView.svg";
+import Import from "../assets/Import.svg";
+import Export from "../assets/Export.svg";
+import Share from "../assets/Share.svg";
+import NewAction from "../assets/NewAction.svg";
 
 function Row() {
   return (
-    <div className="flex w-full h-[48px] py-[6px] px-[8px] border-b-[1px] border-[#EEEEEE] justify-between" >
-      {/* Left Section */}
-      <div className="flex items-center">
-        <button className="flex text-black items-center gap-[3px] border-r-[1px] border-r-[#EEEEEE] px-[11px] my-[6px] hover:bg-[#f6f6f6] h-full">
+    <div className="flex w-full h-[48px] gap-[8px] py-[6px] px-[8px] border-b-[1px] border-[#EEEEEE] items-center" >
+      
+      {/* Tool Bar */}
+      <button className="w-[91px] flex p-[8px] rounded-[4px] gap-[4px] justify-center items-center">
+        <span className="w-[55px] text-sm font-[400] text-[#121212]">
           Tool Bar
-          <ChevronsRight className="w-5 h-5 translate-y-[2px] text-black"/>
-        </button>
+        </span>
+        <div className="w-[16px] h-[16px] flex flex-col justify-center my-auto">
+          <img
+            className="w-[8.6px] h-[9.8px] mx-auto"
+            alt="Double Chevron Icon"
+            src={DoubleChevron}
+          />
+        </div>
+      </button>
 
+      <div className="w-[1px] h-[24px] bg-[#EEEEEE]" />
 
-        <button className="flex text-black items-center gap-[3px] border-r-[#EEEEEE] px-[11px] my-[6px] hover:bg-[#f6f6f6] h-full">
-          <EyeOff className="w-5 h-5 translate-y-[2px] text-black"/>
-          Hide Fields
-        </button>
+      {/* Table Controls Block */}
+      <div className="flex flex-1 h-[36px] gap-[4px] text-sm font-[400]">
+        <Button 
+          text="Hide fields"  
+          icon={Eye}
+        />
 
+        <Button 
+          text="Sort"  
+          icon={UpDownArrow}
+        />
 
-        <button className="flex text-black items-center gap-[3px] border-r-[#EEEEEE] px-[11px] my-[6px] hover:bg-[#f6f6f6] h-full">
-          <ArrowDownUp className="w-5 h-5 translate-y-[2px] text-black"/>
-          Sort
-        </button>
+        <Button 
+          text="Filter"  
+          icon={Filter}
+        />
 
-
-        <button className="flex text-black items-center gap-[3px] border-r-[#EEEEEE] px-[11px] my-[6px] hover:bg-[#f6f6f6] h-full">
-          <ListFilter className="w-5 h-5 translate-y-[2px] text-black"/>
-          Filter
-        </button>
-
-        <button className="flex text-black items-center gap-[3px] border-r-[#EEEEEE] px-[11px] my-[6px] hover:bg-[#f6f6f6] h-full">
-          <ChevronsRight className="w-5 h-5 translate-y-[2px] text-black"/>
-          Cell View
-        </button>
+        <Button 
+          text="Cell view"  
+          icon={CellView}
+        />
       </div>
 
       {/* Right section */}
-      <div className="flex items-center gap-[8px] text-[#545454]">
-        <button className="flex items-center gap-[4px] border-[1px] border-[#afafaf] rounded-[5px] px-[11px] my-[6px] hover:bg-[#f6f6f6] h-full">
-          <ArrowDownToLine className="w-5 h-5 "/>
-          <p>Export</p>
-        </button>
+      <div className="flex w-[437px] items-center gap-[8px] ">
+        {/* Controls */}
+        <div className="flex gap-[8px] items-center font-[400] text-sm text-[#545454]">
+          <Button 
+            text="Import"  
+            icon={Import}
+            border = {true}
+          />
 
-        <button className="flex items-center gap-[4px]  border-[1px] border-[#afafaf] rounded-[5px] px-[11px] my-[6px] hover:bg-[#f6f6f6] h-full">
-          <ArrowDownToLine className="w-5 h-5  rotate-180"/>
-          <p>Import</p>
-        </button>
+          <Button 
+            text="Export"  
+            icon={Export}
+            border = {true}
+          />
 
-        <button className="flex items-center gap-[4px]  border-[1px] border-[#afafaf] rounded-[5px] px-[11px] my-[6px] hover:bg-[#f6f6f6] h-full">
-          <Share2 className="w-5 h-5 "/>
-          <p>Share</p>
-        </button>
+          <Button 
+            text="Share"  
+            icon={Share}
+            border = {true}
+          />
+        </div>
+
         
-        <button className="flex items-center text-white gap-[4px] bg-[#4b6a4f] rounded-[5px] px-[11px] my-[6px] h-full">
-          <Share2 className="w-5 h-5 "/>
-          <p>New Action</p>
+        <button className="flex h-auto items-center text-white gap-[4px] bg-[#4b6a4f] rounded-[6px] px-[24px] py-[8px] h-full">
+          <div className="size-[20px] flex flex-col justify-center">
+            <img
+              className="transform scale-[0.9375] mx-auto my-auto"
+              alt="Icon"
+              src={NewAction}
+            />
+          </div>
+          
+
+          <span className="font-[500] text-[14px] leading-[20px] tracking-normal h-[20px]">
+            New Action
+          </span>
         </button>
       </div>
     </div>
+  )
+}
+
+function Button({text, icon, border}: {text: string, icon:any, border?: boolean}) {
+  return (
+    <button className={`flex w-auto h-auto py-[8px] pl-[8px] pr-[12px] gap-[4px] items-center rounded-[6px]  ${border ? 'border-[1px] border-[#EEEEEE]' : ''}`}>
+
+      <div className="size-[20px] flex flex-col justify-center">
+        <img
+          className="transform scale-[0.9375] mx-auto my-auto"
+          alt="Icon"
+          src={icon}
+        />
+      </div>
+      <span className="">
+        {text}
+      </span>
+    </button>
   )
 }
 

@@ -68,7 +68,7 @@ function Table() {
                       <input 
                         className={'table-column'}
                         style={{ width:`${column.width}px`, textAlign: `${column.align}`}}
-                        value={row[column.accessor]}
+                        value={row[column.accessor] as string}
                         type="text"
                         disabled
                       />
@@ -76,7 +76,7 @@ function Table() {
                       <input 
                         className={`table-column overflow-hidden truncate`}
                         style={{ width:`${column.width}px`, textAlign: `${column.align}`}}
-                        value={row[column.accessor]}
+                        value={row[column.accessor] as string}
                         type="text"
                         onChange={(e) => {
                           handleCellValueChange(column.accessor, rowIndex, e.target.value);
