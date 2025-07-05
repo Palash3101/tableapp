@@ -1,3 +1,6 @@
+import type { RowData } from "../types/row";
+import type { CustomColumn } from "../types/column";
+
 const tableData = {
   columns: [
       { Header: "#", accessor: "index", colour: "#EEEEEE", align: "center", width: 32 },
@@ -14,7 +17,7 @@ const tableData = {
       { Header: "Due Date", accessor: "due_date", colour: "#EAE3FC", align: "right", width: 125 },
 
       { Header: "Est. Value", accessor: "est_value" , colour: "#FFE9E0", align: "right", width: 125 },
-    ],
+    ] as CustomColumn[],
 
   data: [
   {
@@ -77,7 +80,7 @@ const tableData = {
     due_date: "30-01-2025",
     est_value: "2,800,000 ₹"
   }
-]
+] as RowData[]
 };
 
 export default tableData;

@@ -1,33 +1,31 @@
 import { useState } from 'react';
 import { useTable} from 'react-table';
 
+import extendedData from '../helpers/extend_rows';
+
+import type { CustomColumn } from '../types/column';
+import type { RowData } from '../types/row';
 import tableData from '../data/AllOrders';
-
-type RowData = Record<string, any>;
-
-type CustomColumn = {
-  Header: string;
-  accessor: string;
-  colour: string;
-  align: 'left' | 'right' | 'center';
-  width: number;
-};
 
 
 function Table() {
 
-  const [columns, setColumns] = useState<CustomColumn[]>(tableData.columns as CustomColumn[]);
+  const [columns, setColumns] = useState<CustomColumn[]>(extendedData.columns as CustomColumn[]);
 
-    const [data, setData]= useState<RowData[]>(tableData.data);
-
-
-
-    const {
-    getTableProps,
-    getTableBodyProps,
-    } = useTable({ columns, data });
+  const [data, setData]= useState<RowData[]>(extendedData.data);
 
 
+  const {
+  getTableProps,
+  getTableBodyProps,
+  } = useTable({ columns, data });
+
+
+  function handleCellValueChange(accessor: string, rowIndex: number, newValue: string) {
+    console.log(accessor, rowIndex, newValue)
+    tableData.data[rowIndex][accessor] = newValue;
+    setData([...tableData.data]); // Update the state with the new data
+  } 
 
 
 
@@ -80,7 +78,9 @@ function Table() {
                         style={{ width:`${column.width}px`, textAlign: `${column.align}`}}
                         value={row[column.accessor]}
                         type="text"
-                        readOnly
+                        onChange={(e) => {
+                          handleCellValueChange(column.accessor, rowIndex, e.target.value);
+                        }}
                       />
                       
                     }
