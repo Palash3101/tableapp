@@ -1,64 +1,108 @@
 import { Search, Bell } from 'lucide-react';
+
 import PanelShape from '../assets/Shape.svg'
+import Chevron from '../assets/Chevron.svg'
+import More from '../assets/More.svg'
+import Search_2 from '../assets/Search_2.svg'
+import Alert from '../assets/Alert.svg'
+
+import ProfileImage from '../assets/images/Ellipse_1.png'
 
 function TopBar() {
   return (
     <div className="flex py-[8px] px-[16px] h-[56px] border-b-[1px] border-[#EEEEEE] justify-between w-full">
       {/* Left Section */}
-      <div className="flex items-center gap-[8px]">
+      <div className="flex items-center gap-[16px]">
         
-        <button>
+        <button className='size-[24px]'>
           <img
+            alt="Panel Icon"
             src={`${PanelShape}`}
           />
         </button>
         
-        <div className="font-semibold text-[17px]">
-          <span className="text-[#afafaf]">
-            Workspace &gt; Folder 2 &gt; 
+        <div className="gap-[4px] flex items-center font-[500] text-sm text-[#AFAFAF] ">
+
+          <span>
+            Workspace
           </span>
-            Spreadsheet 3
+          
+          <img 
+            src={Chevron}
+            className="size-[12px] my-auto translate-y-[2px]"
+          />
+
+          <span>
+            Folder 2
+          </span>
+
+          <img 
+            src={Chevron}
+            className="size-[12px] my-auto translate-y-[2px]"
+          />
+
+          <div className="flex gap-[8px]">
+
+            <span className='text-[#121212] font-[500] text-sm'>
+              Spreadsheet 3
+            </span>
+
+            <img
+              className="size-[20px] my-auto translate-y-[1px]"
+              src={More}
+              alt='More Options'
+            />
+          </div>
+
         </div>
-        <button className="flex justify-center items-center h-full">
-          ...
-        </button>
       </div>
 
 
       {/* Right Section */}
-      <div className="flex  ">
-        <div className="flex items-center flex-1 max-w-md relative w-full">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#afafaf] w-5 h-5" />
+      <div className="flex gap-[4px]">
+
+        <div className="rounded-[6px] p-[12px] gap-[8px] flex items-center bg-[#F6F6F6]">
+
+          <img 
+            src={Search_2}
+            alt='Search Icon'
+          />
+
           <input
             type="text"
             placeholder="Search within sheet"
-            className="w-auto pl-10 py-2 bg-[#f6f6f6] rounded-lg text-[#] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="font-[400] text-xs w-[117px] outline-none"
           />
       </div>
 
-
-      <div className="flex items-center space-x-4 ml-6">
-    
-
-        <div className="relative">
-          <Bell className="w-6 h-6 text-black hover:text-black cursor-pointer" />
-          <div className="absolute -top-2 -right-2 bg-[#4b6a4f] text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+      <div className="relative cursor-pointer flex items-center justify-center p-[8px]">
+        <img
+          src={Alert}
+          alt="Notification Icon"
+          className="size-[24px] "
+        />
+        
+        <div className="absolute size-[16px] rounded-[100px] border-[2px] border-[#FFFFFF] bg-[#4B6A4F] top-1 right-1">
+          <span className='font-[500] text-[10px] line-height-[16px] text-[#FFFFFF] flex items-center justify-center h-full my-auto'>
             2
-          </div>
-        </div>
-
-
-        <div className="flex items-center space-x-3">
-          <img
-            alt="John Doe"
-            className="w-10 h-10 rounded-full"
-          />
-          <div className="hidden sm:block w-[70px]">
-            <p className="text-sm font-medium text-gray-900">John Doe</p>
-            <p className="text-xs text-gray-500 overflow-hidden whitespace-nowrap text-ellipsis">john.doe@gmail.com</p>
-          </div>
+          </span>
         </div>
       </div>
+
+      <div className="flex py-[6px] pr-[12px] pl-[8px] gap-[8px] items-center">
+
+        <img
+          src={ProfileImage}
+          alt="John Doe"
+          className="size-[28px] rounded-full"
+        />
+
+        <div className="flex flex-col justify-center w-[56px]">
+          <p className="text-xs font-normal text-[#121212]">John Doe</p>
+          <p className="text-[10px] line-height-[12px] text-[#757575] overflow-hidden whitespace-nowrap text-ellipsis">john.doe@gmail.com</p>
+        </div>
+      </div>
+
       </div>
     </div>
   )

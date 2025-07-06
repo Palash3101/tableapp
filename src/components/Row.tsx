@@ -95,7 +95,7 @@ function Row() {
   )
 }
 
-function Button({text, icon, border}: {text: string, icon:any, border?: boolean}) {
+function Button({text, icon, border}: {text: string, icon:string, border?: boolean}) {
   return (
     <button className={`flex w-auto h-auto py-[8px] pl-[8px] pr-[12px] gap-[4px] items-center rounded-[6px]  ${border ? 'border-[1px] border-[#EEEEEE]' : ''}`}>
 

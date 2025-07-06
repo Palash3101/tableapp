@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 400;
   font-size: 16px;
 
-  background-color: rgba(255, 255, 255);
+  background-color: white;
   color: #000000;
 }
 
@@ -19,7 +19,7 @@ button{
   height: 32px;
   padding-right: 8px;
   padding-left: 8px;
-  background-color: transparent;
+  background-color: white;
   outline: none;
 
   /* need to reduce this */
@@ -29,8 +29,37 @@ button{
 }
 
 .table-column:focus {
-  border: 1px solid #6c8b70;
-box-shadow:
-  -1px -4px 4px -2px #a7d7ad,   
-  4px 0px 4px -2px #a7d7ad; 
+  border: 1px solid #6C8B70;
+  box-shadow: 
+    0px 0px 12px 0px #0A6E3D38,
+    0px 0px 4px -2px #0A6E3D99;
+
+}
+
+
+.title-row {
+  height: 44px;
+  color:  #757575;
+
+  font-size: 16px;
+  line-height: 24px;
+
+  padding-left: 16px;
+  padding-right: 16px;
+
+  gap: 8px;
+  opacity: 1;
+  padding-top: 10px;
+  padding-right: 16px;
+  padding-bottom: 10px;
+  padding-left: 16px;
+
+
+}
+
+.title-row.selected {
+  border-top: 2px solid #4B6A4F;
+  background-color: #E8F0E9;
+  color: #3e5741;
+  font-weight: 600;
 }

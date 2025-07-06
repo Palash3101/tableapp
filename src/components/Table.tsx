@@ -22,23 +22,22 @@ function Table() {
 
 
   function handleCellValueChange(accessor: string, rowIndex: number, newValue: string) {
-    console.log(accessor, rowIndex, newValue)
+
     tableData.data[rowIndex][accessor] = newValue;
     setData([...tableData.data]); // Update the state with the new data
   } 
 
 
-
   return (
-    <div className='w-full h-full overflow-auto'>
-      <table {...getTableProps()} className='border-collapse'>
+    <div className='w-full h-full overflow-auto bg-[#f6f6f6]'>
+      <table {...getTableProps()} className='border-separate border-spacing-[1px]] bg-transparent'>
         <thead>
-          <tr>
+          <tr className='gap-[1px]'>
           {
             columns.map((column: CustomColumn, index:number) => (
               <th 
                 key={index}
-                className={'text-[16px] pr-[4px] pl-[8px] border-y border-r border-[#f6f6f6] text-[#757575] font-[600] h-[32px]'}
+                className={'text-[16px] pr-[4px] pl-[8px] text-[#757575] font-[600] h-[32px]'}
                 style={{ width:`${column.width}px`, backgroundColor: `${column.colour}`}}
               >
               
@@ -50,17 +49,18 @@ function Table() {
           </tr>
         </thead>
 
-        <tbody {...getTableBodyProps()} className=''>
+        <tbody {...getTableBodyProps()} className='gap-[1px]'>
           {
             data.map((row: RowData, rowIndex:number) => (
               <tr 
                 key={rowIndex}
+                
               >
                 {
                   columns.map((column:CustomColumn, columnIndex:number)=>(
                     <td
                       key={columnIndex}
-                      className={`border-b-[1px] border-r-[1px] border-[#f6f6f6] 
+                      className={`gap-[1px]
                                 ${column.accessor === "index" ? "text-[#757575]" : ""} 
                                 `}
                     >

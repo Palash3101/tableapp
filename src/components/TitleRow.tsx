@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {Plus} from "lucide-react";
+import Plus from "../assets/Primary.svg"
 
 function TitleRow({ selectedTable, setSelectedTable }: { selectedTable: string, setSelectedTable: (table: string) => void }) {
   const [tables,setTables] = useState(["All Orders", "Pending", "Reviewed", "Arrived"]);
@@ -7,7 +7,9 @@ function TitleRow({ selectedTable, setSelectedTable }: { selectedTable: string, 
 
   function handleKeyDown(e: React.KeyboardEvent<HTMLButtonElement>) {
     if (e.key === "Delete"){
-      console.log("Delete:" + selectedTable);
+      const newTables = deleteTables(tables, selectedTable);
+      setTables(newTables);
+      setSelectedTable(newTables[0])
     }
     else if (e.key === "F2") {
       renameTable();
@@ -18,8 +20,13 @@ function TitleRow({ selectedTable, setSelectedTable }: { selectedTable: string, 
     console.log("Rename: " + selectedTable);
   }
 
+  function deleteTables(tables: string[], selectedTable: string) {
+    const updatedTables = tables.filter(table => table !== selectedTable);
+    return updatedTables;
+  }
+
   return (
-    <div className="flex border-t-[1px] border-[#EEEEEE] pt-[4px] pr-[16px] pl-[32px] w-full fixed bottom-0">
+    <div className="flex border-t-[1px] border-[#EEEEEE] pt-[4px] pr-[16px] pl-[32px] w-full h-[48px] fixed bottom-0 bg-white ">
 
       {
         tables.map((table, index) => (
@@ -27,11 +34,7 @@ function TitleRow({ selectedTable, setSelectedTable }: { selectedTable: string, 
             key={index}
             onKeyDown={(e) => handleKeyDown(e)}
             onDoubleClick={renameTable}
-            className={`flex items-center justify-center h-full px-[16px]
-              ${selectedTable === table ? 
-                  "border-t-[2px] bg-[#e8f0e9] text-[#3e5741] font-semibold" : 
-                  
-                  "text-[#757575]"}`}
+            className={`title-row ${selectedTable === table ? "selected": ""}`}
 
             onClick={() => setSelectedTable(table)}
           >
@@ -40,14 +43,19 @@ function TitleRow({ selectedTable, setSelectedTable }: { selectedTable: string, 
         ))
       }
 
-      <div>
-        <button 
-          className="text-[#757575] hover:text-[#3e5741] transition-colors duration-200"
-          onClick={()=>setTables([...tables, `Table ${tables.length + 1}`])}  
-        >
-          <Plus />
-        </button>
-      </div>
+      <button 
+        className="flex flex-col items-center justify-center "
+        onClick={()=>setTables([...tables, `Table ${tables.length + 1}`])}  
+      >
+        <div className="px-[4px] py-[8px] gap-[4px]">
+          <img
+            className="size-[15px] mx-auto my-auto"
+            alt="Plus Icon"
+            src={Plus}
+          />
+        </div>
+
+      </button>
     </div>
   )
 }

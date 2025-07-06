@@ -17,6 +17,7 @@ const tableData = {
       { Header: "Due Date", accessor: "due_date", colour: "#EAE3FC", align: "right", width: 125 },
 
       { Header: "Est. Value", accessor: "est_value" , colour: "#FFE9E0", align: "right", width: 125 },
+
     ] as CustomColumn[],
 
   data: [
