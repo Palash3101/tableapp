@@ -1,0 +1,16 @@
+
+function URLCell({width, value}: {width: number, value: string}) {
+  return (
+    <input 
+      className='table-column overflow-hidden truncate'
+      style={{ 
+        width:`${width}px`,
+        textDecoration: 'underline',
+      }}
+      value={value as string}
+      type="text"
+    />
+  )
+}
+
+export default URLCell

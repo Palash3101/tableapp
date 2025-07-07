@@ -14,7 +14,7 @@ tableData.columns.forEach((column) => {
     template[column.accessor] = 0; 
   }
 
-  else template[column.accessor] = "";
+  else template[column.accessor] = undefined;
 });
 
 
