@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 function CurrencyCell({ width, value }: { width: number; value: string }) {
   const sanitizedValue = value || '';
@@ -15,7 +15,6 @@ function CurrencyCell({ width, value }: { width: number; value: string }) {
         style={{ width: `97px` }}
         value={sanitizedValue}
         type="text"
-        readOnly={false}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
       />

@@ -7,6 +7,10 @@ import type { CustomColumn } from '../types/column';
 import type { RowData } from '../types/row';
 import tableData from '../data/AllOrders';
 
+import Link from '../assets/HeaderIcons/Link.svg';
+import ArrowSync from '../assets/HeaderIcons/ArrowSync.svg';
+import NewAction from '../assets/NewAction.svg';
+import More from '../assets/More.svg';
 
 //Import Cell Types
 import IndexCell from './Cells/IndexCell';
@@ -99,11 +103,39 @@ function Table() {
         <thead>
           <tr>
             <th colSpan={1} className="bg-white"></th>
-            <th colSpan={4} className="bg-white">This</th>
+            
+            {/* Grouped Columns */}
+            <th colSpan={4} >
+              <div className="bg-[#E2E2E2] w-full h-full flex px-[8px] py-[4px] gap-[8px]">
+                
+                <div className="p-[4px] gap-[4px] rounded-[4px] bg-[#EEEEEE] flex">
+                  <div>
+                    <img src={Link} alt="Link Icon" className='w-[16px] h-[16px]' />
+                  </div>
+                  <div className='text-xs font-normal text-[#545454]' >
+                    Q3 Financial Overview
+                  </div>
+                </div>
+                <div className='flex flex-col justify-center'>  
+                  <img src={ArrowSync} alt="Sync Icon" className='w-[16px] h-[16px] items-center' />
+                </div>
+              </div>
+            </th>
+            
             <th colSpan={1} className="bg-white"></th>
-            <th colSpan={1} className="bg-white"></th>
-            <th colSpan={2} className="bg-white">is a test</th>
-            <th colSpan={1} className="bg-white"></th>
+
+            <th colSpan={1} className="bg-[#D2E0D4] text-[#505450]">
+              <FunctionBlock text={"ABC"}/>
+            </th>
+
+            <th colSpan={2} className="bg-[#DCCFFC] text-[#463E59]">
+              <FunctionBlock text={"Answer a question"} />
+            </th>
+
+            <th colSpan={1} className="bg-[#FAC2AF] text-[#695149]">
+              <FunctionBlock text={"Extract"}/>
+            </th>
+            <th colSpan={1}> Add </th>
           </tr>
           <tr className='gap-[1px]'>
           {
@@ -111,7 +143,7 @@ function Table() {
               <th 
                 key={index}
                 className={'text-[16px] pr-[4px] pl-[8px] text-[#757575] font-[600] h-[32px]'}
-                style={{ width:`${column.width}px`, backgroundColor: `${column.colour}`}}
+                style={{ width:`${column.width}px`, backgroundColor: `${column.backgroundColour || '#EEEEEE'}`, color: `${column.textColour || '#757575'}` }}
               >
               
                 {column.Header}
@@ -154,6 +186,23 @@ function Table() {
 
         
       </table>
+    </div>
+  )
+}
+
+
+function FunctionBlock({text}:{text:string}) {
+  return (
+    <div className='flex justify-center py-[2px] px-[4px] w-full h-full'>
+      <div className='flex gap-[4px] '>
+        <img src={NewAction} alt="Link Icon" className='size-[16px]' />
+
+        <p className='text-sm font-medium '>
+          {text}
+        </p>
+
+        <img src= {More} alt='Icon' className='size-[20px]'/>
+      </div>
     </div>
   )
 }

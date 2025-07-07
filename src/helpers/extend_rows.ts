@@ -18,7 +18,7 @@ tableData.columns.forEach((column) => {
 });
 
 
-const extra_rows = 30; // Number of extra rows to add
+const extra_rows = 15; // Number of extra rows to add
 //Adding template to extendedData
 for (let i = 0; i < extra_rows; i++) {
   const temp = {...template };
