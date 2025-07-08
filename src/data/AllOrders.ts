@@ -7,13 +7,13 @@ const tableData = {
   ],
 
   columns: [
-      { Header: "#", accessor: "index", type: "INDEX", width: 32 },
-      { Header: "Job Request", accessor: "job_request" , type: "TEXT", width: 256 },
-      { Header: "Submitted", accessor: "submitted" , type: "DATE", width: 124 },
-      { Header: "Status", accessor: "status" , type: "STATUS", width: 124 },
-      { Header: "Submitter", accessor: "submitter" , type: "TEXT", width: 124 },
+      { Header: "#", accessor: "index", type: "INDEX", width: 32},
+      { Header: "Job Request", accessor: "job_request" , type: "TEXT", width: 256, columnIcon: "Briefcase.svg"  },
+      { Header: "Submitted", accessor: "submitted" , type: "DATE", width: 124, columnIcon: "Calendar.svg"  },
+      { Header: "Status", accessor: "status" , type: "STATUS", width: 124, columnIcon: "ChevronCircle.svg"  },
+      { Header: "Submitter", accessor: "submitter" , type: "TEXT", width: 124, columnIcon: "Person.svg"  },
 
-      { Header: "URL", accessor: "url" , type: "URL", width: 124 },
+      { Header: "URL", accessor: "url" , type: "URL", width: 124, columnIcon: "Globe.svg"  },
 
       { Header: "Assigned To", accessor: "assigned_to" , backgroundColour: "#E8F0E9",textColour:"#666C66" ,type: "TEXT", width: 124 },
 
@@ -21,8 +21,6 @@ const tableData = {
       { Header: "Due Date", accessor: "due_date", backgroundColour: "#EAE3FC", textColour:"#655C80",type: "DATE", width: 125 },
 
       { Header: "Est. Value", accessor: "est_value" , backgroundColour: "#FFE9E0", textColour:"#8C6C62",type: "CURRENCY", width: 125 },
-
-      {Header: "", accessor: "add_new_column", type: "TEXT", width: 124, backgroundColour: "#FFFFFF"}
 
     ] as CustomColumn[],
 
@@ -38,7 +36,6 @@ const tableData = {
     priority: "Medium",
     due_date: "20-11-2024",
     est_value: "6,200,000",
-    add_new_column: ""
   },
   {
     index: 2,
@@ -51,7 +48,6 @@ const tableData = {
     priority: "High",
     due_date: "30-10-2024",
     est_value: "3,500,000",
-    add_new_column: ""
   },
   {
     index: 3,
@@ -64,7 +60,7 @@ const tableData = {
     priority: "Medium",
     due_date: "10-12-2024",
     est_value: "4,750,000",
-    add_new_column: ""
+    add_new_row: true
   },
   {
     index: 4,
@@ -73,11 +69,11 @@ const tableData = {
     status: "Complete",
     submitter: "Emily Green",
     url: "www.emilygreenui.com",
-    assigned_to: "Tom WTEXT",
+    assigned_to: "Tom White",
     priority: "Low",
     due_date: "15-01-2025",
     est_value: "5,900,000",
-    add_new_column: ""
+    add_new_row: true
   },
   {
     index: 5,
@@ -90,7 +86,7 @@ const tableData = {
     priority: "Low",
     due_date: "30-01-2025",
     est_value: "2,800,000",
-    add_new_column: ""
+    add_new_row: true
   }
 ] as RowData[]
 };

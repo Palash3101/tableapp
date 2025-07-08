@@ -13,7 +13,7 @@ function CurrencyCell({ width, value }: { width: number; value: string }) {
       <input
         className="flex-1 text-right text-black h-[16px] text-xs font-medium outline-none"
         style={{ width: `97px` }}
-        value={sanitizedValue}
+        defaultValue={sanitizedValue}
         type="text"
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}

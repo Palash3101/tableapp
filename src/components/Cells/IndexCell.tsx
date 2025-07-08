@@ -4,7 +4,7 @@ function IndexCell({width, value}: {width: number, value: string}) {
     <input 
       className={'table-column'}
       style={{ width:`${width}px`}}
-      value={value}
+      defaultValue={value}
       type="text"
       disabled
     />

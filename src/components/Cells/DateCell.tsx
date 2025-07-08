@@ -4,7 +4,7 @@ function DateCell({width, value}: {width: number, value: string}) {
     <input 
       className='table-column overflow-hidden truncate text-right'
       style={{ width:`${width}px`}}
-      value={value as string}
+      defaultValue={value as string}
       type="text"
     />
   )

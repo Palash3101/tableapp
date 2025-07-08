@@ -5,5 +5,6 @@ export type CustomColumn = {
   width: number;
   backgroundColour?: string;
   textColour?: string;
+  columnIcon?: string;
 };
 

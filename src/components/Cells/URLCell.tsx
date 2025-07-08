@@ -7,7 +7,7 @@ function URLCell({width, value}: {width: number, value: string}) {
         width:`${width}px`,
         textDecoration: 'underline',
       }}
-      value={value as string}
+      defaultValue={value as string}
       type="text"
     />
   )
