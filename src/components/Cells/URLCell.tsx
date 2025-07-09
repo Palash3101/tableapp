@@ -1,5 +1,22 @@
+import type { RowData } from "../../types/row"
 
-function URLCell({width, value}: {width: number, value: string}) {
+interface CellProps {
+  width: number;
+  value: string;
+  accessor: string;
+  rowIndex: number;
+  data: RowData[];
+  setData: React.Dispatch<React.SetStateAction<RowData[]>>;
+}
+
+
+function URLCell({width, value, accessor, rowIndex,data, setData}: CellProps) {
+
+  function handleCellValueChange(accessor: string, rowIndex: number, newValue: string) {
+    data[rowIndex][accessor] = newValue;
+    setData([...data]); 
+  } 
+
   return (
     <input 
       className='table-column overflow-hidden truncate'
@@ -8,6 +25,7 @@ function URLCell({width, value}: {width: number, value: string}) {
         textDecoration: 'underline',
       }}
       defaultValue={value as string}
+      onChange={(e)=>handleCellValueChange(accessor, rowIndex, e.target.value)}
       type="text"
     />
   )

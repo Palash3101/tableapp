@@ -18,8 +18,8 @@ tableData.columns.forEach((column) => {
 });
 
 
-const extra_rows = 15; // Number of extra rows to add
-//Adding template to extendedData
+const extra_rows = 21;// Number of extra rows to add
+
 for (let i = 0; i < extra_rows; i++) {
   const temp = {...template };
   temp.index = currentLength + i + 1;// Incrementing index for each new row

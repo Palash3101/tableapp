@@ -9,7 +9,9 @@ import Export from "../assets/Export.svg";
 import Share from "../assets/Share.svg";
 import NewAction from "../assets/NewAction.svg";
 
-function Row() {
+import type { RowData } from "../types/row";
+
+function Row({data}: {data: RowData[]}) {
   return (
     <div className="flex w-full h-[48px] gap-[8px] py-[6px] px-[8px] border-b-[1px] border-[#EEEEEE] items-center" >
       
@@ -72,6 +74,7 @@ function Row() {
             text="Share"  
             icon={Share}
             border = {true}
+            data={data}
           />
         </div>
 
@@ -95,9 +98,12 @@ function Row() {
   )
 }
 
-function Button({text, icon, border}: {text: string, icon:string, border?: boolean}) {
+function Button({text, icon, border, data}: {text: string, icon:string, border?: boolean, data?: RowData[]}) {
   return (
-    <button className={`flex w-auto h-auto py-[8px] pl-[8px] pr-[12px] gap-[4px] items-center rounded-[6px]  ${border ? 'border-[1px] border-[#EEEEEE]' : ''}`}>
+    <button 
+      className={`flex w-auto h-auto py-[8px] pl-[8px] pr-[12px] gap-[4px] items-center rounded-[6px]  ${border ? 'border-[1px] border-[#EEEEEE]' : ''}`}
+      onClick={() => {console.log(data)}}
+    >
 
       <div className="size-[20px] flex flex-col justify-center">
         <img

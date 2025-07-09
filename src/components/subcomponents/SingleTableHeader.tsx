@@ -1,6 +1,6 @@
 import Dropdown from '../../assets/HeaderIcons/Dropdown.svg'
 
-function SingleTableHeader({columnIcon, Header}: {columnIcon?: string, Header: string}) {
+function SingleTableHeader({columnIcon, Header, accessor}: {columnIcon?: string, Header: string, accessor: string}) {
   return (
     <div className='flex w-full h-full pr-[4px] pl-[8px] items-center'>
 
@@ -20,11 +20,15 @@ function SingleTableHeader({columnIcon, Header}: {columnIcon?: string, Header: s
       
       {
         columnIcon && 
-        <img 
-          src={Dropdown}
-          alt='Dropdown'
-          className='size-[20px]'
-        />
+        <button
+          onClick={() => console.log('Dropdown', accessor)}
+        >
+          <img 
+            src={Dropdown}
+            alt='Dropdown'
+            className='size-[20px]'
+          />
+        </button>
       }
 
     </div>

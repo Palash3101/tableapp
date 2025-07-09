@@ -2,8 +2,6 @@ import Link from '../../assets/HeaderIcons/Link.svg';
 import ArrowSync from '../../assets/HeaderIcons/ArrowSync.svg';
 import NewAction from '../../assets/NewAction.svg';
 import More from '../../assets/More.svg';
-import Add from '../../assets/HeaderIcons/Add.svg';
-
 
 function TableCustomHeader() {
   return (

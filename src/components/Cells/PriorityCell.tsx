@@ -1,3 +1,5 @@
+import { useState } from "react";
+import type { RowData } from "../../types/row";
 
 const colours = {
   //type: text
@@ -7,25 +9,76 @@ const colours = {
   'undefined': '#FFFFFF'
 }
 
-function PriorityCell({width, value}: {width: number, value: 'Low' | 'Medium' | 'High' |'undefined' }) {
+interface CellProps {
+  width: number;
+  value: 'Low' | 'Medium' | 'High' | 'undefined'
+  accessor: string;
+  rowIndex: number;
+  data: RowData[];
+  setData: React.Dispatch<React.SetStateAction<RowData[]>>;
+}
+
+function PriorityCell({width, value, setData, accessor, rowIndex, data}: CellProps) {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const textColor = colours[value] || '#FFFFFF';
+
+  function handlePriorityChange(newPriority: 'Low' | 'Medium' | 'High' | 'undefined') {
+    data[rowIndex][accessor] = newPriority;
+    setData([...data]);
+    setIsDropdownOpen(false);
+  }
+
   return (
-    <button 
-      className="text-center overflow-hidden truncate gap-[8px] table-column"
-      style={{ width: `${width}px` }}
-    >
-      <span 
-        className="font-semibold text-xs"
-        style={{ 
-          backgroundColor: '#FFFFFF',
-          color: textColor 
-        }}
+    <div className="relative">
+      <button 
+        className="text-center overflow-hidden truncate gap-[8px] table-column"
+        style={{ width: `${width}px` }}
+        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
       >
-        {value || '&nbsp'}  
-      </span>
-    </button>
+        <span 
+          className="font-semibold text-xs"
+          style={{ 
+            backgroundColor: '#FFFFFF',
+            color: textColor 
+          }}
+        >
+          {value || '&nbsp'}  
+        </span>
+      </button>
+
+      {isDropdownOpen && (
+        <div className="absolute bg-white mt-1 z-10 flex flex-col gap-[4px]">
+          {['Low', 'Medium', 'High'].map((priority) => (
+            <button 
+              key={priority}
+              className="z-50 bg-white flex items-center justify-center cursor-pointer"
+              style={{ width: `${width}px` }}
+              onClick={() => handlePriorityChange(priority as 'Low' | 'Medium' | 'High')}
+            >
+              <span 
+                className="font-semibold text-xs"
+                style={{ 
+                  backgroundColor: '#FFFFFF',
+                  color: colours[priority as 'Low' | 'Medium' | 'High'] 
+                }}
+              >
+                {priority}  
+              </span>
+            </button>
+          ))}
+
+          <button
+            className="text-sm text-gray-500 hover:text-gray-700 underline"
+            style={{ width: `${width}px` }}
+            onClick={() => handlePriorityChange('undefined')}
+          >
+            Clear
+          </button>
+        </div>
+      )}
+    </div>
   )
 }
 
-export default PriorityCell
+export default PriorityCell;
 

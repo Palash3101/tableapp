@@ -1,5 +1,3 @@
-import { Search, Bell } from 'lucide-react';
-
 import PanelShape from '../assets/Shape.svg'
 import Chevron from '../assets/Chevron.svg'
 import More from '../assets/More.svg'

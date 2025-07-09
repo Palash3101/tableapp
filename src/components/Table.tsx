@@ -1,10 +1,7 @@
-import { useState } from 'react';
 import { useTable} from 'react-table';
 
-import extendedData from '../helpers/extend_rows';
-
 import type { CustomColumn } from '../types/column';
-import type { RowData } from '../types/row';
+import type { RowData } from '../types/row';  
 
 //Import Cell Types
 import IndexCell from './Cells/IndexCell';
@@ -20,11 +17,7 @@ import TableCustomHeader from './subcomponents/TableCustomHeader';
 import SingleTableHeader from './subcomponents/SingleTableHeader';
 
 
-function Table() {
-
-  const [columns, setColumns] = useState<CustomColumn[]>(extendedData.columns as CustomColumn[]);
-
-  const [data, setData]= useState<RowData[]>(extendedData.data);
+function Table({columns, data, setData}: {columns: CustomColumn[], data: RowData[], setData: React.Dispatch<React.SetStateAction<RowData[]>>}) {
 
 
   const {
@@ -32,14 +25,8 @@ function Table() {
   getTableBodyProps,
   } = useTable({ columns, data });
 
-
-  // function handleCellValueChange(accessor: string, rowIndex: number, newValue: string) {
-  //   tableData.data[rowIndex][accessor] = newValue;
-  //   setData([...tableData.data]); // Update the state with the new data
-  // } 
-
-  function renderCell(type:string, width:number, value:string) {
-
+  function renderCell(type:string, width:number, value:string, accessor: string, rowIndex: number) {
+    
     switch (type) {
 
       case 'INDEX':
@@ -48,41 +35,64 @@ function Table() {
           value={value}
         />;
 
-
       case 'TEXT':
         return <TextCell
           width={width}
           value={value}
+          accessor={accessor}
+          rowIndex={rowIndex}
+          data={data}
+          setData={setData}
         />;
 
       case 'STATUS':
         return <StatusCell
           width={width}
           value={value as 'In-process' | 'Need to start' | 'Complete' | 'Blocked'}
+          accessor={accessor}
+          rowIndex={rowIndex}
+          data={data}
+          setData={setData}
           />;
       
       case 'DATE':
         return <DateCell
           width={width}
           value={value}
+          accessor={accessor}
+          rowIndex={rowIndex}
+          data={data}
+          setData={setData}
         />;
       
       case 'URL':
         return <URLCell
           width={width}
           value={value}
+          accessor={accessor}
+          rowIndex={rowIndex}
+          data={data}
+          setData={setData}
         />;
       
       case 'PRIORITY':
         return <PriorityCell
           width={width}
           value={value as 'Low' | 'Medium' | 'High'| 'undefined' }
+          accessor={accessor}
+          rowIndex={rowIndex}
+          data={data}
+          setData={setData}
         />;
       
       case 'CURRENCY':
         return <CurrencyCell
           width={width}
           value={value}
+          accessor={accessor}
+          rowIndex={rowIndex}
+          data={data}
+          setData={setData}
         />;
 
 
@@ -90,6 +100,10 @@ function Table() {
         return <TextCell
           width={width}
           value={value}
+          accessor={accessor}
+          rowIndex={rowIndex}
+          data={data}
+          setData={setData}
         />;
     }
   }
@@ -117,6 +131,7 @@ function Table() {
                 <SingleTableHeader
                   columnIcon={column.columnIcon}
                   Header={column.Header}
+                  accessor={column.accessor}
                 />
               </th>
             ))
@@ -142,6 +157,8 @@ function Table() {
                         column.type,
                         column.width,
                         row[column.accessor] as string,
+                        column.accessor,
+                        rowIndex
                       )
                     }
                     </td>
