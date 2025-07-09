@@ -18,12 +18,18 @@ tableData.columns.forEach((column) => {
 });
 
 
-const extra_rows = 21;// Number of extra rows to add
+const ct = 30;// Number of extra rows to add
 
-for (let i = 0; i < extra_rows; i++) {
-  const temp = {...template };
-  temp.index = currentLength + i + 1;// Incrementing index for each new row
-  extendedData.data.push(temp);
+for (let i = 0; i < ct; i++) {
+  if (i>=currentLength) {
+    const newRow:RowData = {...template};
+    newRow.index = i + 1; // Setting the index for the new row
+    tableData.data.push(newRow);
+  }
+
+  else{
+    extendedData.data[i]['index'] = i + 1; // Ensuring the index is set for existing rows
+  }
 }
 
 

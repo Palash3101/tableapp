@@ -24,7 +24,6 @@ function StatusCell({width, value, accessor, rowIndex, data, setData}: CellProps
   const [bgColor, textColor] = colours[value] || ['#FFFFFF', '#999999'];
 
   function handleStatusChange(newStatus: 'In-process' | 'Need to start' | 'Complete' | 'Blocked' | '') {
-    console.log(newStatus)
     data[rowIndex][accessor] = newStatus;
     setData([...data]);
     setIsDropdownOpen(false);

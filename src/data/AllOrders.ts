@@ -26,7 +26,6 @@ const tableData = {
 
   data: [
   {
-    index: 1,
     job_request: "Launch social media campaign for product",
     submitted: "15-11-2024",
     status: "In-process",
@@ -38,7 +37,6 @@ const tableData = {
     est_value: "6,200,000",
   },
   {
-    index: 2,
     job_request: "Update press kit for company redesign",
     submitted: "28-10-2024",
     status: "Need to start",
@@ -50,7 +48,6 @@ const tableData = {
     est_value: "3,500,000",
   },
   {
-    index: 3,
     job_request: "Finalize user testing feedback for app",
     submitted: "05-12-2024",
     status: "In-process",
@@ -63,7 +60,6 @@ const tableData = {
     add_new_row: true
   },
   {
-    index: 4,
     job_request: "Design new features for the website",
     submitted: "10-01-2025",
     status: "Complete",
@@ -76,7 +72,6 @@ const tableData = {
     add_new_row: true
   },
   {
-    index: 5,
     job_request: "Prepare financial report for Q4",
     submitted: "25-01-2025",
     status: "Blocked",
