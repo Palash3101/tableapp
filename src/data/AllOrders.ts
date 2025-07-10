@@ -2,25 +2,22 @@ import type { RowData } from "../types/row";
 import type { CustomColumn } from "../types/column";
 
 const tableData = {
-  columnGroups:[
-
-  ],
 
   columns: [
-      { Header: "#", accessor: "index", type: "INDEX", width: 32},
-      { Header: "Job Request", accessor: "job_request" , type: "TEXT", width: 256, columnIcon: "Briefcase.svg"  },
-      { Header: "Submitted", accessor: "submitted" , type: "DATE", width: 124, columnIcon: "Calendar.svg"  },
-      { Header: "Status", accessor: "status" , type: "STATUS", width: 124, columnIcon: "ChevronCircle.svg"  },
-      { Header: "Submitter", accessor: "submitter" , type: "TEXT", width: 124, columnIcon: "Person.svg"  },
+      { Header: "#", accessor: "index", type: "INDEX", width: 32, visibility: true },
+      { Header: "Job Request", accessor: "job_request" , type: "TEXT", width: 256, columnIcon: "Briefcase.svg", visibility: true },
+      { Header: "Submitted", accessor: "submitted" , type: "DATE", width: 124, columnIcon: "Calendar.svg", visibility: true },
+      { Header: "Status", accessor: "status" , type: "STATUS", width: 124, columnIcon: "ChevronCircle.svg", visibility: true },
+      { Header: "Submitter", accessor: "submitter" , type: "TEXT", width: 124, columnIcon: "Person.svg", visibility: true },
 
-      { Header: "URL", accessor: "url" , type: "URL", width: 124, columnIcon: "Globe.svg"  },
+      { Header: "URL", accessor: "url" , type: "URL", width: 124, columnIcon: "Globe.svg", visibility: true },
 
-      { Header: "Assigned To", accessor: "assigned_to" , backgroundColour: "#E8F0E9",textColour:"#666C66" ,type: "TEXT", width: 124 },
+      { Header: "Assigned To", accessor: "assigned_to" , backgroundColour: "#E8F0E9", textColour: "#666C66", type: "TEXT", width: 124, visibility: true },
 
-      { Header: "Priority", accessor: "priority", backgroundColour: "#EAE3FC", textColour:"#655C80",type: "PRIORITY", width: 125 },
-      { Header: "Due Date", accessor: "due_date", backgroundColour: "#EAE3FC", textColour:"#655C80",type: "DATE", width: 125 },
+      { Header: "Priority", accessor: "priority", backgroundColour: "#EAE3FC", textColour: "#655C80", type: "PRIORITY", width: 125, visibility: true },
+      { Header: "Due Date", accessor: "due_date", backgroundColour: "#EAE3FC", textColour: "#655C80", type: "DATE", width: 125, visibility: true },
 
-      { Header: "Est. Value", accessor: "est_value" , backgroundColour: "#FFE9E0", textColour:"#8C6C62",type: "CURRENCY", width: 125 },
+      { Header: "Est. Value", accessor: "est_value" , backgroundColour: "#FFE9E0", textColour: "#8C6C62", type: "CURRENCY", width: 125, visibility: true },
 
     ] as CustomColumn[],
 

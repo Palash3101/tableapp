@@ -11,21 +11,40 @@ import NewAction from "../assets/NewAction.svg";
 
 import type { RowData } from "../types/row";
 import { useState } from "react";
+import type { Row } from "react-table";
+import type { CustomColumn } from "../types/column";
 
-function HideFieldsAction() {
-  console.log("HideFields function called");
+function HideFieldsAction(columns: CustomColumn[], setColumns: React.Dispatch<React.SetStateAction<CustomColumn[]>>) {
+  const updatedColumns = columns.map((column) => {
+    if (column.accessor === 'url') {
+      return { ...column, visibility: !column.visibility };
+    }
+    return column;
+  });
+  setColumns(updatedColumns);
 }
 
-function SortAction() {
-  console.log("Sort function called");
+function SortAction(data: RowData[]) {
+  //Only need to change the name field forchanging the field, is mindful of state and will react accordingly
+  return [...data].sort((a, b) => {
+    const nameA = String(a.submitter ?? '').trim().toLowerCase();
+    const nameB = String(b.submitter ?? '').trim().toLowerCase();
+
+    const isEmptyA = nameA === '';
+    const isEmptyB = nameB === '';
+
+    if (isEmptyA && !isEmptyB) return 1;   // A is empty → push down
+    if (!isEmptyA && isEmptyB) return -1;  // B is empty → B goes down
+    return nameA.localeCompare(nameB);     // Normal alphabetical sort
+  });
 }
 
 function FilterAction() {
   console.log("Filter function called");
 }
 
-function CellViewAction() {
-  console.log("CellView function called");
+function CellViewAction(selectedCell: {accessor: string, rowIndex: number}, data: RowData[]) {
+  console.log(data[selectedCell.rowIndex][selectedCell.accessor]);
 }
 
 function ImportAction() {
@@ -36,14 +55,21 @@ function ExportAction() {
   console.log("Export function called");
 }
 
-function ShareAction() {
-  console.log("Share function called");
+function ShareAction(data: RowData[]) {
+  console.log(data);
+}
+
+interface RowProps {
+  data: RowData[];
+  setData: React.Dispatch<React.SetStateAction<RowData[]>>;
+  selectedCell: {accessor: string, rowIndex: number};
+  columns: CustomColumn[];
+  setColumns: React.Dispatch<React.SetStateAction<CustomColumn[]>>;
 }
 
 
-function Row({data}: {data: RowData[]}) {
+function Row({data, setData, selectedCell, columns, setColumns}: RowProps) {
   const [isToolBarOpen, setISToolBarOpen] = useState(true);
-
 
   return (
     <div className="flex w-full h-[48px] gap-[8px] py-[6px] px-[8px] border-b-[1px] border-[#EEEEEE] items-center" >
@@ -78,13 +104,16 @@ function Row({data}: {data: RowData[]}) {
           <Button 
             text="Hide fields"  
             icon={Eye}
-            onClick={HideFieldsAction}
+            onClick={()=>HideFieldsAction(columns, setColumns)}
           />
 
           <Button 
             text="Sort"  
             icon={UpDownArrow}
-            onClick={SortAction}
+            onClick={()=>{
+              const updatedData = SortAction(data);
+              setData(updatedData)
+            }}
           />
 
           <Button 
@@ -96,7 +125,7 @@ function Row({data}: {data: RowData[]}) {
           <Button 
             text="Cell view"  
             icon={CellView}
-            onClick={CellViewAction}
+            onClick={()=>CellViewAction(selectedCell, data)}
           />
         </>
       }
@@ -125,7 +154,7 @@ function Row({data}: {data: RowData[]}) {
             text="Share"  
             icon={Share}
             border = {true}
-            onClick={ShareAction}
+            onClick={()=>ShareAction(data)}
           />
         </div>
 

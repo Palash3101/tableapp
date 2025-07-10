@@ -3,6 +3,7 @@ export type CustomColumn = {
   accessor: string;
   type: 'TEXT' | 'STATUS' | 'DATE' | 'CURRENCY' | 'URL' | 'PRIORITY'| 'INDEX';
   width: number;
+  visibility: boolean; // Updated to boolean
   backgroundColour?: string;
   textColour?: string;
   columnIcon?: string;

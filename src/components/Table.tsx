@@ -17,17 +17,15 @@ import TableCustomHeader from './subcomponents/TableCustomHeader';
 import SingleTableHeader from './subcomponents/SingleTableHeader';
 
 
-function Table({columns, data, setData}: {columns: CustomColumn[], data: RowData[], setData: React.Dispatch<React.SetStateAction<RowData[]>>}) {
-
+function Table({columns, data, setData, selectedCell, setSelectedCell}: {columns: CustomColumn[], data: RowData[], setData: React.Dispatch<React.SetStateAction<RowData[]>>, selectedCell: {accessor: string, rowIndex: number}, setSelectedCell: React.Dispatch<React.SetStateAction<{accessor: string, rowIndex: number}>>}) {
 
   const {
   getTableProps,
   getTableBodyProps,
   } = useTable({ columns, data });
 
-  function renderCell(type:string, width:number, value:string, accessor: string, rowIndex: number) {
-    
-    switch (type) {
+  function renderCell(type:string, width:number, value:string, accessor: string, rowIndex: number, selectedCell: {accessor: string, rowIndex: number}, setSelectedCell: React.Dispatch<React.SetStateAction<{accessor: string, rowIndex: number}>> ) {
+    switch (type) { 
 
       case 'INDEX':
         return <IndexCell 
@@ -43,6 +41,8 @@ function Table({columns, data, setData}: {columns: CustomColumn[], data: RowData
           rowIndex={rowIndex}
           data={data}
           setData={setData}
+          selectedCell={selectedCell}
+          setSelectedCell={setSelectedCell}
         />;
 
       case 'STATUS':
@@ -53,6 +53,8 @@ function Table({columns, data, setData}: {columns: CustomColumn[], data: RowData
           rowIndex={rowIndex}
           data={data}
           setData={setData}
+          selectedCell={selectedCell}
+          setSelectedCell={setSelectedCell}
           />;
       
       case 'DATE':
@@ -63,6 +65,8 @@ function Table({columns, data, setData}: {columns: CustomColumn[], data: RowData
           rowIndex={rowIndex}
           data={data}
           setData={setData}
+          selectedCell={selectedCell}
+          setSelectedCell={setSelectedCell}
         />;
       
       case 'URL':
@@ -73,6 +77,8 @@ function Table({columns, data, setData}: {columns: CustomColumn[], data: RowData
           rowIndex={rowIndex}
           data={data}
           setData={setData}
+          selectedCell={selectedCell}
+          setSelectedCell={setSelectedCell}
         />;
       
       case 'PRIORITY':
@@ -83,6 +89,8 @@ function Table({columns, data, setData}: {columns: CustomColumn[], data: RowData
           rowIndex={rowIndex}
           data={data}
           setData={setData}
+          selectedCell={selectedCell}
+          setSelectedCell={setSelectedCell}
         />;
       
       case 'CURRENCY':
@@ -93,6 +101,8 @@ function Table({columns, data, setData}: {columns: CustomColumn[], data: RowData
           rowIndex={rowIndex}
           data={data}
           setData={setData}
+          selectedCell={selectedCell}
+          setSelectedCell={setSelectedCell}
         />;
 
 
@@ -104,6 +114,8 @@ function Table({columns, data, setData}: {columns: CustomColumn[], data: RowData
           rowIndex={rowIndex}
           data={data}
           setData={setData}
+          selectedCell={selectedCell}
+          setSelectedCell={setSelectedCell}
         />;
     }
   }
@@ -118,22 +130,26 @@ function Table({columns, data, setData}: {columns: CustomColumn[], data: RowData
 
           <tr className='gap-[1px]'>
           {
-            columns.map((column: CustomColumn, index:number) => (
-              <th 
-                key={index}
-                className={'h-[32px]'}
-                style={{ 
-                  width:`${column.width}px`, 
-                  backgroundColor: column.backgroundColour || '#EEEEEE', 
-                  color: column.textColour || '#757575', 
-                }}
-              >
-                <SingleTableHeader
-                  columnIcon={column.columnIcon}
-                  Header={column.Header}
-                  accessor={column.accessor}
-                />
-              </th>
+            columns.map((column: CustomColumn, index: number) => (
+              !column.visibility 
+                ? null 
+                : (
+                  <th 
+                    key={index}
+                    className={'h-[32px]'}
+                    style={{ 
+                      width: `${column.width}px`, 
+                      backgroundColor: column.backgroundColour || '#EEEEEE', 
+                      color: column.textColour || '#757575', 
+                    }}
+                  >
+                    <SingleTableHeader
+                      columnIcon={column.columnIcon}
+                      Header={column.Header}
+                      accessor={column.accessor}
+                    />
+                  </th>
+                )
             ))
           }
           </tr>
@@ -141,27 +157,31 @@ function Table({columns, data, setData}: {columns: CustomColumn[], data: RowData
 
         <tbody {...getTableBodyProps()} className='gap-[1px]'>
           {
-            data.map((row: RowData, rowIndex:number) => (
+            data.map((row: RowData, rowIndex: number) => (
               <tr 
                 key={rowIndex}
-                
               >
                 {
-                  columns.map((column:CustomColumn, columnIndex:number)=>(
-                    <td
-                      key={columnIndex}
-                      // onKeyDown={(e)=>{console.log(e.key, rowIndex, row[column.accessor])}}
-                    >
-                    {
-                      renderCell(
-                        column.type,
-                        column.width,
-                        row[column.accessor] as string,
-                        column.accessor,
-                        rowIndex
+                  columns.map((column: CustomColumn, columnIndex: number) => (
+                    !column.visibility 
+                      ? null 
+                      : (
+                        <td
+                          key={columnIndex}
+                        >
+                        {
+                          renderCell(
+                            column.type,
+                            column.width,
+                            row[column.accessor] as string,
+                            column.accessor,
+                            rowIndex,
+                            selectedCell,
+                            setSelectedCell
+                          )
+                        }
+                        </td>
                       )
-                    }
-                    </td>
                   ))
                 }
               </tr>

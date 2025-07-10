@@ -16,9 +16,11 @@ interface CellProps {
   rowIndex: number;
   data: RowData[];
   setData: React.Dispatch<React.SetStateAction<RowData[]>>;
+  selectedCell: {accessor: string, rowIndex: number};
+  setSelectedCell: React.Dispatch<React.SetStateAction<{accessor: string, rowIndex: number}>>;
 }
 
-function PriorityCell({width, value, setData, accessor, rowIndex, data}: CellProps) {
+function PriorityCell({width, value, setData, accessor, rowIndex, data, selectedCell, setSelectedCell}: CellProps) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const textColor = colours[value] || '#FFFFFF';
 
@@ -31,9 +33,10 @@ function PriorityCell({width, value, setData, accessor, rowIndex, data}: CellPro
   return (
     <div className="relative">
       <button 
-        className="text-center overflow-hidden truncate gap-[8px] table-column"
+        className={`text-center overflow-hidden truncate gap-[8px] table-column ${selectedCell.accessor === accessor && selectedCell.rowIndex === rowIndex ? 'thiscell' : ''}`}
         style={{ width: `${width}px` }}
-        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+        onDoubleClick={() => setIsDropdownOpen(!isDropdownOpen)}
+        onFocus={() => setSelectedCell({accessor, rowIndex})}
       >
         <span 
           className="font-semibold text-xs"

@@ -28,13 +28,6 @@ button{
   line-height: 16px;
 }
 
-.table-column:focus {
-  border: 1px solid #6C8B70;
-  box-shadow: 
-    0px 0px 12px 0px #0A6E3D38,
-    0px 0px 4px -2px #0A6E3D99;
-
-}
 
 
 .title-row {
@@ -62,4 +55,12 @@ button{
   background-color: #E8F0E9;
   color: #3e5741;
   font-weight: 600;
+}
+
+
+.thiscell {
+  border: 1px solid #6C8B70;
+  box-shadow: 
+    0px 0px 12px 0px #0A6E3D38,
+    0px 0px 4px -2px #0A6E3D99;
 }

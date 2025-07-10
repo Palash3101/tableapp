@@ -14,7 +14,7 @@ tableData.columns.forEach((column) => {
     template[column.accessor] = 0; 
   }
 
-  else template[column.accessor] = undefined;
+  else template[column.accessor] = '';
 });
 
 
@@ -32,9 +32,5 @@ for (let i = 0; i < ct; i++) {
   }
 }
 
-
-
-
-// console.log(template);
 
 export default extendedData;

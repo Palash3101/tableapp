@@ -16,10 +16,12 @@ interface CellProps {
   rowIndex: number;
   data: RowData[];
   setData: React.Dispatch<React.SetStateAction<RowData[]>>;
+  selectedCell: {accessor: string, rowIndex: number};
+  setSelectedCell: React.Dispatch<React.SetStateAction<{accessor: string, rowIndex: number}>>;
 }
 
 
-function StatusCell({width, value, accessor, rowIndex, data, setData}: CellProps) {
+function StatusCell({width, value, accessor, rowIndex, data, setData, selectedCell, setSelectedCell}: CellProps) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [bgColor, textColor] = colours[value] || ['#FFFFFF', '#999999'];
 
@@ -33,9 +35,10 @@ function StatusCell({width, value, accessor, rowIndex, data, setData}: CellProps
   return (
     <div className="relative">
       <button 
-        className="table-column text-center overflow-hidden truncate gap-[8px]"
+        className={`table-column text-center overflow-hidden truncate gap-[8px] ${selectedCell.accessor === accessor && selectedCell.rowIndex === rowIndex ? 'thiscell' : ''}`}
         style={{ width: `${width}px` }}
-        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+        onDoubleClick={() => {setIsDropdownOpen(!isDropdownOpen);}}
+        onFocus={() => setSelectedCell({accessor, rowIndex})}
       >
         <span 
           className="rounded-[100px] py-[4px] px-[8px] bg-[#FFF3D6] font-[500] text-xs"
