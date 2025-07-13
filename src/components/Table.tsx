@@ -17,9 +17,18 @@ import CurrencyCell from './Cells/CurrencyCell';
 import TableCustomHeader from './subcomponents/TableCustomHeader';
 import SingleTableHeader from './subcomponents/SingleTableHeader';
 
+interface TableProps {
+  setColumns: React.Dispatch<React.SetStateAction<CustomColumn[]>>;
+  columns: CustomColumn[];
+  data: RowData[];
+  setData: React.Dispatch<React.SetStateAction<RowData[]>>;
+  selectedCell: { accessor: string; rowIndex: number };
+  setSelectedCell: React.Dispatch<React.SetStateAction<{ accessor: string; rowIndex: number }>>;
+  columnHeader: columnHeader[];
+  setColumnHeader: React.Dispatch<React.SetStateAction<columnHeader[]>>;
+}
 
-
-function Table({setColumns, columns, data, setData, selectedCell, setSelectedCell, columnHeader, setColumnHeader}: {setColumns: React.Dispatch<React.SetStateAction<CustomColumn[]>>, columns: CustomColumn[], data: RowData[], setData: React.Dispatch<React.SetStateAction<RowData[]>>, selectedCell: {accessor: string, rowIndex: number}, setSelectedCell: React.Dispatch<React.SetStateAction<{accessor: string, rowIndex: number}>>, columnHeader: columnHeader[], setColumnHeader: React.Dispatch<React.SetStateAction<columnHeader[]>>}) {
+function Table({setColumns, columns, data, setData, selectedCell, setSelectedCell, columnHeader, setColumnHeader}: TableProps) {
 
   const {
   getTableProps,
@@ -131,7 +140,12 @@ function Table({setColumns, columns, data, setData, selectedCell, setSelectedCel
       <table {...getTableProps()} className='border-separate border-spacing-[1px] bg-transparent'>
         <thead>
 
-          <TableCustomHeader columnHeader={columnHeader} columns={columns} setColumnHeader={setColumnHeader} setColumns={setColumns}/>
+          <TableCustomHeader 
+            columnHeader={columnHeader} 
+            columns={columns} 
+            setColumnHeader={setColumnHeader} 
+            setColumns={setColumns}
+          />
 
           <tr className='gap-[1px]'>
           {
@@ -145,8 +159,6 @@ function Table({setColumns, columns, data, setData, selectedCell, setSelectedCel
                   >
                     <SingleTableHeader
                       column={column}
-                      columns={columns}
-                      setColumns={setColumns}
                     />
                   </th>
                 )

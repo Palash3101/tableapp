@@ -2,7 +2,7 @@ import { useState } from 'react'
 import Dropdown from '../../assets/HeaderIcons/Dropdown.svg'
 import type { CustomColumn } from '../../types/column';
 
-function SingleTableHeader({column}: {column: CustomColumn, columns: CustomColumn[], setColumns: React.Dispatch<React.SetStateAction<CustomColumn[]>>}) {
+function SingleTableHeader({column}: {column: CustomColumn}) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [columnName, setColumnName] = useState(column.Header);
   const [textColor, setTextColor] = useState(column.textColour || '#000000');
