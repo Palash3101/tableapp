@@ -1,7 +1,17 @@
 import type { RowData } from "../types/row";
 import type { CustomColumn } from "../types/column";
+import type { columnHeader } from "../types/columnHeader";
 
 const tableData = {
+  columnHeader: [
+    {type: "Empty", colspan: 1},
+    {type: "Custom", colspan: 4, backgroundColour: "#EEEEEE", textColour: "#757575",text:"Hello"},
+    {type: "Empty", colspan: 1},
+    {type: "NewAction", colspan: 1, backgroundColour: "#D2E0D4", textColour: "#505450",text:"ABC"},
+    {type: "NewAction", colspan: 2, backgroundColour: "#DCCFFC", textColour: "#463E59",text:"Answer a question"},
+    {type: "NewAction", colspan: 1, backgroundColour: "#FAC2AF", textColour: "#695149",text:"Extract"},
+    {type: "Add"}
+  ] as columnHeader[],
 
   columns: [
       { Header: "#", accessor: "index", type: "INDEX", width: 32, visibility: true },
@@ -18,6 +28,8 @@ const tableData = {
       { Header: "Due Date", accessor: "due_date", backgroundColour: "#EAE3FC", textColour: "#655C80", type: "DATE", width: 125, visibility: true },
 
       { Header: "Est. Value", accessor: "est_value" , backgroundColour: "#FFE9E0", textColour: "#8C6C62", type: "CURRENCY", width: 125, visibility: true },
+      { Header: "", accessor: "add_new_column", type:"ADD",backgroundColour:"#FFFFFF", width: 124, visibility: true },
+      
 
     ] as CustomColumn[],
 

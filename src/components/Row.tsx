@@ -17,14 +17,22 @@ import type { CustomColumn } from "../types/column";
 import TemplateGenerator from "../helpers/templategenerator";
 import rowExtender from "../helpers/rowExtender";
 
-function HideFieldsAction(columns: CustomColumn[], setColumns: React.Dispatch<React.SetStateAction<CustomColumn[]>>) {
+function HideFieldsAction(columns: CustomColumn[], setColumns: React.Dispatch<React.SetStateAction<CustomColumn[]>>, columnHeader: columnHeader[], setColumnHeader: React.Dispatch<React.SetStateAction<columnHeader[]>>  ) {
   const updatedColumns = columns.map((column) => {
-    if (column.accessor === 'url') {
+    if (column.accessor === 'submitter') {
       return { ...column, visibility: !column.visibility };
     }
     return column;
   });
+  const updatedColumnHeader = columnHeader.map((header) => {
+    if (header.type === 'Custom') {
+      header.colspan = header.colspan === 4 ? 3 : 4; // Toggle colspan
+    }
+    return header;
+  });
+
   setColumns(updatedColumns);
+  setColumnHeader(updatedColumnHeader);
 }
 
 function SortAction(data: RowData[]) {
@@ -64,16 +72,20 @@ function ShareAction(data: RowData[]) {
   console.log(data);
 }
 
+import type { columnHeader } from "../types/columnHeader";
+
 interface RowProps {
   data: RowData[];
   setData: React.Dispatch<React.SetStateAction<RowData[]>>;
   selectedCell: {accessor: string, rowIndex: number};
   columns: CustomColumn[];
   setColumns: React.Dispatch<React.SetStateAction<CustomColumn[]>>;
+  columnHeader: columnHeader[];
+  setColumnHeader: React.Dispatch<React.SetStateAction<columnHeader[]>>;
 }
 
 
-function Row({data, setData, selectedCell, columns, setColumns}: RowProps) {
+function Row({data, setData, selectedCell, columns, setColumns, columnHeader, setColumnHeader}: RowProps) {
   const [isToolBarOpen, setISToolBarOpen] = useState(true);
 
   return (
@@ -109,7 +121,7 @@ function Row({data, setData, selectedCell, columns, setColumns}: RowProps) {
           <Button 
             text="Hide fields"  
             icon={Eye}
-            onClick={()=>HideFieldsAction(columns, setColumns)}
+            onClick={()=>HideFieldsAction(columns, setColumns, columnHeader, setColumnHeader)}
           />
 
           <Button 

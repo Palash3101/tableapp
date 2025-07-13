@@ -85,6 +85,8 @@ function TopBar() {
             type="text"
             placeholder="Search within sheet"
             className="font-[400] text-xs w-[117px] outline-none"
+            //Can add different search algorithms here
+            onKeyDown={(e) => {if (e.key === 'Enter') console.log('Search:', e.currentTarget.value)}}
           />
       </div>
 

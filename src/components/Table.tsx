@@ -2,6 +2,7 @@ import { useTable} from 'react-table';
 
 import type { CustomColumn } from '../types/column';
 import type { RowData } from '../types/row';  
+import type { columnHeader } from '../types/columnHeader';
 
 //Import Cell Types
 import IndexCell from './Cells/IndexCell';
@@ -17,7 +18,8 @@ import TableCustomHeader from './subcomponents/TableCustomHeader';
 import SingleTableHeader from './subcomponents/SingleTableHeader';
 
 
-function Table({columns, data, setData, selectedCell, setSelectedCell}: {columns: CustomColumn[], data: RowData[], setData: React.Dispatch<React.SetStateAction<RowData[]>>, selectedCell: {accessor: string, rowIndex: number}, setSelectedCell: React.Dispatch<React.SetStateAction<{accessor: string, rowIndex: number}>>}) {
+
+function Table({setColumns, columns, data, setData, selectedCell, setSelectedCell, columnHeader}: {setColumns: React.Dispatch<React.SetStateAction<CustomColumn[]>>, columns: CustomColumn[], data: RowData[], setData: React.Dispatch<React.SetStateAction<RowData[]>>, selectedCell: {accessor: string, rowIndex: number}, setSelectedCell: React.Dispatch<React.SetStateAction<{accessor: string, rowIndex: number}>>, columnHeader: columnHeader[]}) {
 
   const {
   getTableProps,
@@ -105,7 +107,10 @@ function Table({columns, data, setData, selectedCell, setSelectedCell}: {columns
           setSelectedCell={setSelectedCell}
         />;
 
-
+      case 'ADD':
+        return (
+          <div className='w-[124px] h-[32px] bg-white border-dashed border-x-[1px] border-[#CBCBCB]' />
+        )
       default:
         return <TextCell
           width={width}
@@ -126,7 +131,7 @@ function Table({columns, data, setData, selectedCell, setSelectedCell}: {columns
       <table {...getTableProps()} className='border-separate border-spacing-[1px] bg-transparent'>
         <thead>
 
-          <TableCustomHeader />
+          <TableCustomHeader columnHeader={columnHeader}/>
 
           <tr className='gap-[1px]'>
           {
@@ -137,16 +142,11 @@ function Table({columns, data, setData, selectedCell, setSelectedCell}: {columns
                   <th 
                     key={index}
                     className={'h-[32px]'}
-                    style={{ 
-                      width: `${column.width}px`, 
-                      backgroundColor: column.backgroundColour || '#EEEEEE', 
-                      color: column.textColour || '#757575', 
-                    }}
                   >
                     <SingleTableHeader
-                      columnIcon={column.columnIcon}
-                      Header={column.Header}
-                      accessor={column.accessor}
+                      column={column}
+                      columns={columns}
+                      setColumns={setColumns}
                     />
                   </th>
                 )

@@ -17,14 +17,35 @@ function App() {
 
   const [columns, setColumns] = useState<CustomColumn[]>(extendedData.columns as CustomColumn[]);
   const [data, setData]= useState<RowData[]>(extendedData.data);
+  const [columnHeader, setColumnHeader] = useState(extendedData.columnHeader);
 
   const [selectedCell, setSelectedCell] = useState({accessor: columns[1].accessor, rowIndex: 0});
 
   return (
     <div className="flex flex-col items-center w-full h-screen">
       <TopBar />
-      <Row data={data} setData={setData} selectedCell={selectedCell} columns={columns} setColumns={setColumns}/>
-      <Table columns={columns} data={data} setData={setData} selectedCell={selectedCell} setSelectedCell={setSelectedCell}/>
+
+      <Row 
+        data={data} 
+        setData={setData} 
+        selectedCell={selectedCell} 
+        columns={columns} 
+        setColumns={setColumns}
+        setColumnHeader={setColumnHeader}
+        columnHeader={columnHeader}
+      />
+      
+      <Table 
+        setColumns={setColumns} 
+        columns={columns} 
+        data={data} 
+        setData={setData} 
+        selectedCell={selectedCell} 
+        setSelectedCell={setSelectedCell}
+        columnHeader={columnHeader}
+      />
+      
+      
       <TitleRow 
         setSelectedTable={setSelectedTable} 
         selectedTable={selectedTable}
