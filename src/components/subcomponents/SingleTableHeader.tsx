@@ -19,8 +19,7 @@ function SingleTableHeader({column}: {column: CustomColumn, columns: CustomColum
   };
 
   return (
-    <button
-      onClick={() => setIsDropdownOpen(!isDropdownOpen)} 
+    <div
       className='h-full w-full'
       style={{ 
         width: `${column.width}px`, 
@@ -31,7 +30,10 @@ function SingleTableHeader({column}: {column: CustomColumn, columns: CustomColum
         borderLeft: `${column.type == 'ADD'?'dashed 1px #CBCBCB' : 'none'}`
       }}
     >
-      <div className='flex w-full h-full pr-[4px] pl-[8px] items-center'>
+      <button 
+        onClick={() => setIsDropdownOpen(!isDropdownOpen)} 
+        className='flex w-full h-full pr-[4px] pl-[8px] items-center'
+      >
 
         <div className='flex flex-1 gap-[4px] font-semibold'>
           {
@@ -58,7 +60,7 @@ function SingleTableHeader({column}: {column: CustomColumn, columns: CustomColum
           </div>
         }
 
-      </div>
+      </button>
  {
         isDropdownOpen && (
           <div className='absolute bg-white shadow-lg rounded-md mt-[4px] p-[12px] min-w-[280px] z-50 border'>
@@ -136,7 +138,7 @@ function SingleTableHeader({column}: {column: CustomColumn, columns: CustomColum
           </div>
         )
       }
-    </button>
+    </div>
   )
 }
 

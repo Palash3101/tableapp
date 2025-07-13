@@ -10,14 +10,14 @@ import extendedData from "./helpers/extend_rows";
 
 import type { CustomColumn } from "./types/column";
 import type { RowData } from './types/row';  
-
+import type { columnHeader } from './types/columnHeader';
 
 function App() {
   const [selectedTable, setSelectedTable] = useState("All Orders");
 
   const [columns, setColumns] = useState<CustomColumn[]>(extendedData.columns as CustomColumn[]);
   const [data, setData]= useState<RowData[]>(extendedData.data);
-  const [columnHeader, setColumnHeader] = useState(extendedData.columnHeader);
+  const [columnHeader, setColumnHeader] = useState<columnHeader[]>(extendedData.columnHeader);
 
   const [selectedCell, setSelectedCell] = useState({accessor: columns[1].accessor, rowIndex: 0});
 
@@ -43,6 +43,7 @@ function App() {
         selectedCell={selectedCell} 
         setSelectedCell={setSelectedCell}
         columnHeader={columnHeader}
+        setColumnHeader={setColumnHeader}
       />
       
       

@@ -10,7 +10,7 @@ const tableData = {
     {type: "NewAction", colspan: 1, backgroundColour: "#D2E0D4", textColour: "#505450",text:"ABC"},
     {type: "NewAction", colspan: 2, backgroundColour: "#DCCFFC", textColour: "#463E59",text:"Answer a question"},
     {type: "NewAction", colspan: 1, backgroundColour: "#FAC2AF", textColour: "#695149",text:"Extract"},
-    {type: "Add"}
+    {type: "Add", colspan: 1}
   ] as columnHeader[],
 
   columns: [
@@ -28,13 +28,12 @@ const tableData = {
       { Header: "Due Date", accessor: "due_date", backgroundColour: "#EAE3FC", textColour: "#655C80", type: "DATE", width: 125, visibility: true },
 
       { Header: "Est. Value", accessor: "est_value" , backgroundColour: "#FFE9E0", textColour: "#8C6C62", type: "CURRENCY", width: 125, visibility: true },
-      { Header: "", accessor: "add_new_column", type:"ADD",backgroundColour:"#FFFFFF", width: 124, visibility: true },
-      
-
+      { Header: "", accessor: "add_new_column", type: "ADD", backgroundColour: "#FFFFFF", width: 124, visibility: true }
     ] as CustomColumn[],
 
   data: [
   {
+    index: 1,
     job_request: "Launch social media campaign for product",
     submitted: "15-11-2024",
     status: "In-process",
@@ -46,6 +45,7 @@ const tableData = {
     est_value: "6,200,000",
   },
   {
+    index: 2,
     job_request: "Update press kit for company redesign",
     submitted: "28-10-2024",
     status: "Need to start",
@@ -57,6 +57,7 @@ const tableData = {
     est_value: "3,500,000",
   },
   {
+    index: 3,
     job_request: "Finalize user testing feedback for app",
     submitted: "05-12-2024",
     status: "In-process",
@@ -69,6 +70,7 @@ const tableData = {
     add_new_row: true
   },
   {
+    index: 4,
     job_request: "Design new features for the website",
     submitted: "10-01-2025",
     status: "Complete",
@@ -81,6 +83,7 @@ const tableData = {
     add_new_row: true
   },
   {
+    index: 5,
     job_request: "Prepare financial report for Q4",
     submitted: "25-01-2025",
     status: "Blocked",

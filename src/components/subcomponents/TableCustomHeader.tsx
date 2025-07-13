@@ -5,8 +5,41 @@ import More from '../../assets/More.svg';
 import Add from '../../assets/HeaderIcons/Add.svg';
 
 import type { columnHeader } from '../../types/columnHeader';
+import type { CustomColumn } from '../../types/column';
 
-function TableCustomHeader({ columnHeader }: { columnHeader: columnHeader[] }) {
+function addColumn(columnHeader: columnHeader[], setColumnHeader: React.Dispatch<React.SetStateAction<columnHeader[]>>, columns: CustomColumn[], setColumns: React.Dispatch<React.SetStateAction<CustomColumn[]>>) {
+  let newColumns = [...columns];
+  const addNewColumn = columns.find(column => column.accessor === "add_new_column") as CustomColumn;
+
+  newColumns.push({
+    Header: 'New Column',
+    accessor: `new_column_${columns.length + 1}`,
+    visibility: true,
+    width: 124,
+    type: 'TEXT'
+  });
+  
+  newColumns = newColumns.filter(column => column.accessor !== "add_new_column");
+  newColumns.push(addNewColumn);
+
+  setColumns(newColumns);
+
+  let newColumnHeader = [...columnHeader]
+  const addNewHeader = columnHeader.find(header => header.type === "Add") as columnHeader;
+
+  newColumnHeader.push({
+    type: 'Empty',
+    text: '',
+    colspan: 1,
+  });
+
+  newColumnHeader=newColumnHeader.filter(header => header.type !== 'Add');
+  newColumnHeader.push(addNewHeader)
+  setColumnHeader(newColumnHeader);
+}
+
+
+function TableCustomHeader({ columnHeader, setColumnHeader, columns, setColumns }: { columnHeader: columnHeader[], setColumnHeader: React.Dispatch<React.SetStateAction<columnHeader[]>>, columns: CustomColumn[], setColumns: React.Dispatch<React.SetStateAction<CustomColumn[]>> }) {
   return (
     <tr>
       {
@@ -28,7 +61,7 @@ function TableCustomHeader({ columnHeader }: { columnHeader: columnHeader[] }) {
             ? (
               <button 
                 className='flex justify-center items-center h-[32px] w-[124px] border-x-[1px] border-dashed border-[#CBCBCB]'
-                onClick={() => console.log('Add action clicked')}
+                onClick={() => addColumn(columnHeader, setColumnHeader, columns, setColumns)}
               >
                 <img src={Add} alt="Add Icon" className='size-[16px]' />
               </button>
