@@ -76,10 +76,6 @@ function App() {
     };
   }, [selectedCell, columns, data.length]);
 
-  useEffect(() => {
-    console.log(selectedCell);
-  }, [selectedCell])
-
   return (
     <div className="flex flex-col items-center w-full h-screen overflow-hidden">
       <TopBar />

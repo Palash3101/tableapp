@@ -14,7 +14,6 @@ function SingleTableHeader({column}: {column: CustomColumn}) {
     column.Header = columnName;
     column.textColour = textColor;
     column.backgroundColour = backgroundColor;
-    console.log(column)
     
   };
 
