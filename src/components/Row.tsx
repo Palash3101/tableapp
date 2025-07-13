@@ -14,6 +14,9 @@ import { useState } from "react";
 import type { Row } from "react-table";
 import type { CustomColumn } from "../types/column";
 
+import TemplateGenerator from "../helpers/templategenerator";
+import rowExtender from "../helpers/rowExtender";
+
 function HideFieldsAction(columns: CustomColumn[], setColumns: React.Dispatch<React.SetStateAction<CustomColumn[]>>) {
   const updatedColumns = columns.map((column) => {
     if (column.accessor === 'url') {
@@ -39,12 +42,14 @@ function SortAction(data: RowData[]) {
   });
 }
 
-function FilterAction() {
-  console.log("Filter function called");
+function FilterAction(data: RowData[], setData: React.Dispatch<React.SetStateAction<RowData[]>>, columns: CustomColumn[]) {
+  const smth_new = data.filter(item => item.priority === "Low");
+  setData(rowExtender(smth_new, TemplateGenerator(columns)));
 }
 
 function CellViewAction(selectedCell: {accessor: string, rowIndex: number}, data: RowData[]) {
-  console.log(data[selectedCell.rowIndex][selectedCell.accessor]);
+  const cellData = data[selectedCell.rowIndex][selectedCell.accessor];
+  console.log(cellData !== '' ? cellData : "No data available");
 }
 
 function ImportAction() {
@@ -119,7 +124,7 @@ function Row({data, setData, selectedCell, columns, setColumns}: RowProps) {
           <Button 
             text="Filter"  
             icon={Filter}
-            onClick={FilterAction}
+            onClick={()=>FilterAction(data, setData, columns)}
           />
 
           <Button 

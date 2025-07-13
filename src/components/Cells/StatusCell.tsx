@@ -1,5 +1,5 @@
 import type { RowData } from "../../types/row";
-import { useState, useEffect } from "react";
+import { useState} from "react";
 
 const colours = {
   //type: [bg, text]

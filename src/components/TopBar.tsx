@@ -6,13 +6,28 @@ import Alert from '../assets/Alert.svg'
 
 import ProfileImage from '../assets/images/Ellipse_1.png'
 
+function handlePanelClick() {
+  console.log('Panel clicked');
+}
+
+function handleNotificationsClick() {
+  console.log('Notifications clicked');
+}
+
+function handleProfileClick() {
+  console.log('Profile clicked');
+}
+
 function TopBar() {
   return (
     <div className="flex py-[8px] px-[16px] h-[56px] border-b-[1px] border-[#EEEEEE] justify-between w-full">
       {/* Left Section */}
       <div className="flex items-center gap-[16px]">
         
-        <button className='size-[24px]'>
+        <button 
+          onClick={handlePanelClick}
+          className='size-[24px]'
+        >
           <img
             alt="Panel Icon"
             src={`${PanelShape}`}
@@ -73,8 +88,11 @@ function TopBar() {
           />
       </div>
 
-      <div className="relative cursor-pointer flex items-center justify-center p-[8px]">
-        <img
+      <button 
+        className="relative cursor-pointer flex items-center justify-center p-[8px]"
+        onClick={handleNotificationsClick}
+      >
+        <img  
           src={Alert}
           alt="Notification Icon"
           className="size-[24px] "
@@ -85,9 +103,12 @@ function TopBar() {
             2
           </span>
         </div>
-      </div>
+      </button>
 
-      <div className="flex py-[6px] pr-[12px] pl-[8px] gap-[8px] items-center">
+      <button 
+        className="flex py-[6px] pr-[12px] pl-[8px] gap-[8px] items-center"
+        onClick={handleProfileClick}
+      >
 
         <img
           src={ProfileImage}
@@ -99,7 +120,7 @@ function TopBar() {
           <p className="text-xs font-normal text-[#121212]">John Doe</p>
           <p className="text-[10px] line-height-[12px] text-[#757575] overflow-hidden whitespace-nowrap text-ellipsis">john.doe@gmail.com</p>
         </div>
-      </div>
+      </button>
 
       </div>
     </div>
