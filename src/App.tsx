@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import Row from "./components/Row";
 import TitleRow from "./components/TitleRow";
@@ -21,8 +21,67 @@ function App() {
 
   const [selectedCell, setSelectedCell] = useState({accessor: columns[1].accessor, rowIndex: 0});
 
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      // Prevent default scrolling behavior for arrow keys
+      if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Enter'].includes(event.key)) {
+        event.preventDefault();
+      }
+
+      switch(event.key) {
+        case 'ArrowUp':
+          if(selectedCell.rowIndex > 0) {
+            setSelectedCell(prev => ({
+              ...prev,
+              rowIndex: prev.rowIndex - 1
+            }));
+          }
+          break;
+        case 'ArrowDown':
+          if(selectedCell.rowIndex < data.length - 1) {
+            setSelectedCell(prev => ({
+              ...prev,
+              rowIndex: prev.rowIndex + 1
+            }));
+          }
+          break;
+        case 'ArrowLeft': {
+          const currentColumnIndex = columns.findIndex(col => col.accessor === selectedCell.accessor);
+          if (currentColumnIndex > 0) {
+            setSelectedCell(prev => ({
+              ...prev,
+              accessor: columns[currentColumnIndex - 1].accessor
+            }));
+          }
+          break;
+        }
+        case 'ArrowRight': {
+          const nextColumnIndex = columns.findIndex(col => col.accessor === selectedCell.accessor);
+          if (nextColumnIndex < columns.length - 1) {
+            setSelectedCell(prev => ({
+              ...prev,
+              accessor: columns[nextColumnIndex + 1].accessor
+            }));
+          }
+          break;
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    // Cleanup listener on component unmount
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [selectedCell, columns, data.length]);
+
+  useEffect(() => {
+    console.log(selectedCell);
+  }, [selectedCell])
+
   return (
-    <div className="flex flex-col items-center w-full h-screen">
+    <div className="flex flex-col items-center w-full h-screen overflow-hidden">
       <TopBar />
 
       <Row 

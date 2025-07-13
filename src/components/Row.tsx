@@ -11,7 +11,6 @@ import NewAction from "../assets/NewAction.svg";
 
 import type { RowData } from "../types/row";
 import { useState } from "react";
-import type { Row } from "react-table";
 import type { CustomColumn } from "../types/column";
 
 import TemplateGenerator from "../helpers/templategenerator";
@@ -30,6 +29,7 @@ function HideFieldsAction(columns: CustomColumn[], setColumns: React.Dispatch<Re
     }
     return header;
   });
+
 
   setColumns(updatedColumns);
   setColumnHeader(updatedColumnHeader);
@@ -74,7 +74,7 @@ function ShareAction(data: RowData[]) {
 
 import type { columnHeader } from "../types/columnHeader";
 
-interface RowProps {
+export interface RowProps {
   data: RowData[];
   setData: React.Dispatch<React.SetStateAction<RowData[]>>;
   selectedCell: {accessor: string, rowIndex: number};

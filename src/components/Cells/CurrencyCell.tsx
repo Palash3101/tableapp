@@ -1,3 +1,4 @@
+import { useRef, useEffect } from "react";
 import type { RowData } from "../../types/row"
 
 interface CellProps {
@@ -14,11 +15,18 @@ interface CellProps {
 
 function CurrencyCell({ width, value, accessor, rowIndex, data, setData, selectedCell, setSelectedCell}: CellProps) {
   const sanitizedValue = value || '';
+  const inputRef = useRef<HTMLInputElement>(null);
 
+  useEffect(() => {
+    if (selectedCell.accessor === accessor && selectedCell.rowIndex === rowIndex) {
+      inputRef.current?.focus();
+      inputRef.current?.select();
+    }
+  }, [selectedCell, accessor, rowIndex]);
 
   function handleCellValueChange(accessor: string, rowIndex: number, newValue: string) {
-    data[rowIndex][accessor] = newValue; // Remove non-numeric characters
-    setData([...data]); // Update the state with the new data
+    data[rowIndex][accessor] = newValue; 
+    setData([...data]); 
   } 
 
   return (
@@ -28,6 +36,7 @@ function CurrencyCell({ width, value, accessor, rowIndex, data, setData, selecte
       style={{ width: `${width}px` }}
     >
       <input
+        ref={inputRef}
         className="flex-1 text-right text-black h-[16px] text-xs font-medium outline-none"
         style={{ width: `97px` }}
         value={value}

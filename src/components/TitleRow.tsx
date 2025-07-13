@@ -34,8 +34,7 @@ function TitleRow({ selectedTable, setSelectedTable }: { selectedTable: string, 
             key={index}
             onKeyDown={(e) => handleKeyDown(e)}
             onDoubleClick={renameTable}
-            className={`title-row ${selectedTable === table ? "selected": ""}`}
-
+            className={`title-row ${selectedTable === table ? "selected": ""} hover:bg-[#F5F5F5] transition-colors duration-200`}
             onClick={() => setSelectedTable(table)}
           >
             {table}
@@ -44,7 +43,7 @@ function TitleRow({ selectedTable, setSelectedTable }: { selectedTable: string, 
       }
 
       <button 
-        className="flex flex-col items-center justify-center "
+        className="flex flex-col items-center justify-center hover:bg-[#F5F5F5] transition-colors duration-200 rounded-[4px]"
         onClick={()=>setTables([...tables, `Table ${tables.length + 1}`])}  
       >
         <div className="px-[4px] py-[8px] gap-[4px]">

@@ -1,3 +1,4 @@
+import { useRef, useEffect } from 'react';
 import type { RowData } from "../../types/row"
 
 interface CellProps {
@@ -13,7 +14,14 @@ interface CellProps {
 
 
 function TextCell({width, value, accessor, rowIndex, data, setData, selectedCell, setSelectedCell}: CellProps) {
+  const inputRef = useRef<HTMLInputElement>(null);
   
+  useEffect(() => {
+    if (selectedCell.accessor === accessor && selectedCell.rowIndex === rowIndex) {
+      inputRef.current?.focus();
+    }
+  }, [selectedCell, accessor, rowIndex]);
+
   function handleCellValueChange(accessor: string, rowIndex: number, newValue: string) {
     data[rowIndex][accessor] = newValue;
     setData([...data]); 
@@ -21,6 +29,7 @@ function TextCell({width, value, accessor, rowIndex, data, setData, selectedCell
   
   return (
     <input 
+      ref={inputRef}
       className={`table-column overflow-hidden truncate ${selectedCell.accessor == accessor && selectedCell.rowIndex == rowIndex ? 'thiscell' : ''}`}
       style={{ width:`${width}px`}}
       value={value as string}

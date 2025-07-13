@@ -1,4 +1,5 @@
-import type { RowData } from "../../types/row"
+import { useRef, useEffect } from "react";
+import type { RowData } from "../../types/row";
 
 interface CellProps {
   width: number;
@@ -11,8 +12,15 @@ interface CellProps {
   setSelectedCell: React.Dispatch<React.SetStateAction<{accessor: string, rowIndex: number}>>;
 }
 
+function URLCell({width, value, accessor, rowIndex, data, setData, selectedCell, setSelectedCell}: CellProps) {
+  const inputRef = useRef<HTMLInputElement>(null);
 
-function URLCell({width, value, accessor, rowIndex,data, setData, selectedCell, setSelectedCell}: CellProps) {
+  useEffect(() => {
+    if (selectedCell.accessor === accessor && selectedCell.rowIndex === rowIndex) {
+      inputRef.current?.focus();
+      inputRef.current?.select();
+    }
+  }, [selectedCell, accessor, rowIndex]);
 
   function handleCellValueChange(accessor: string, rowIndex: number, newValue: string) {
     data[rowIndex][accessor] = newValue;
@@ -20,18 +28,18 @@ function URLCell({width, value, accessor, rowIndex,data, setData, selectedCell, 
   } 
 
   return (
-    <input 
-      className={`table-column overflow-hidden truncate ${selectedCell.accessor == accessor && selectedCell.rowIndex == rowIndex ? 'thiscell' : ''}`}
-      style={{ 
-        width:`${width}px`,
-        textDecoration: 'underline',
-      }}
-      value={value as string}
-      onChange={(e)=>handleCellValueChange(accessor, rowIndex, e.target.value)}
-      onFocus={() => (setSelectedCell({accessor, rowIndex}))}
-      type="text"
-    />
-  )
+    <div className="flex items-center h-[32px] overflow-hidden">
+      <input
+        ref={inputRef}
+        className={`table-column overflow-hidden truncate underline font-medium text-xs ${selectedCell.accessor === accessor && selectedCell.rowIndex === rowIndex ? 'thiscell' : ''}`}
+        style={{ width: `${width}px` }}
+        value={value}
+        type="text"
+        onChange={(e) => handleCellValueChange(accessor, rowIndex, e.target.value)}
+        onFocus={() => setSelectedCell({accessor, rowIndex})}
+      />
+    </div>
+  );
 }
 
-export default URLCell
+export default URLCell;

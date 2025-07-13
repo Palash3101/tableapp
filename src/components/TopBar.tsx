@@ -26,7 +26,7 @@ function TopBar() {
         
         <button 
           onClick={handlePanelClick}
-          className='size-[24px]'
+          className='size-[24px] hover:bg-[#F5F5F5] rounded-[4px] transition-colors duration-200'
         >
           <img
             alt="Panel Icon"
@@ -91,7 +91,7 @@ function TopBar() {
       </div>
 
       <button 
-        className="relative cursor-pointer flex items-center justify-center p-[8px]"
+        className="relative cursor-pointer flex items-center justify-center p-[8px] hover:bg-[#F5F5F5] rounded-[4px] transition-colors duration-200"
         onClick={handleNotificationsClick}
       >
         <img  
@@ -108,7 +108,7 @@ function TopBar() {
       </button>
 
       <button 
-        className="flex py-[6px] pr-[12px] pl-[8px] gap-[8px] items-center"
+        className="flex py-[6px] pr-[12px] pl-[8px] gap-[8px] items-center hover:bg-[#F5F5F5] rounded-[4px] transition-colors duration-200"
         onClick={handleProfileClick}
       >
 
